@@ -1,1 +1,2 @@
-# cs5008-fall-2023-conclancy
+# RepoTemplates
+Homework for CS5008 and CS5009 Fall 2023
