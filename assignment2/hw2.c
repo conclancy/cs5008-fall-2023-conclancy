@@ -8,7 +8,7 @@
 
 bool isEmpty (int* s, int t) {
 	// returns true if t = -1
-	if (s == NULL|| t < 0) {
+	if (s == NULL || t < 0) {
 		return true; 
 	} else {
 		return false;
@@ -16,9 +16,12 @@ bool isEmpty (int* s, int t) {
 }
 
 bool isFull (int* s, int t) {
-  // returns true if no more room in the stack
-
-  // INSERT YOUR CODE HERE
+	// returns true if no more room in the stack
+	if ((sizeof(s) / sizeof(s[0])) == MAXSIZE || t + 1 == MAXSIZE) {
+		return true;
+	} else {
+		return false;
+	}
 }
 
 void push(int v, int* s, int* tp) {
@@ -73,6 +76,9 @@ int main () {
   printf("\n**Tests Begin Here**\n\n");
   printf("test 1 - expected 1:%d\n", isEmpty(stack1, top1));
   printf("test 2 - expected 0:%d\n", isEmpty(stack1, 1));
+  printf("test 3 - expected 1:%d\n", isFull(stack1, 99));
+  printf("test 4 - expected 0:%d\n", isFull(stack1, top1));
+
 
   return 0;
 }
