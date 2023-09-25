@@ -7,9 +7,12 @@
 #define MAXSIZE 100
 
 bool isEmpty (int* s, int t) {
-  // returns true if t = -1
-
-  // INSERT YOUR CODE HERE
+	// returns true if t = -1
+	if (s == NULL|| t < 0) {
+		return true; 
+	} else {
+		return false;
+	}
 }
 
 bool isFull (int* s, int t) {
@@ -64,5 +67,12 @@ int main () {
   printf("2> %d\n",pop(stack2, &top2));
   printf("1> %d\n",pop(stack1, &top1));
   printf("2> %d\n",pop(stack2, &top2));
+  
+  // TESTS TODO 
+
+  printf("\n**Tests Begin Here**\n\n");
+  printf("test 1 - expected 1:%d\n", isEmpty(stack1, top1));
+  printf("test 2 - expected 0:%d\n", isEmpty(stack1, 1));
+
   return 0;
 }
