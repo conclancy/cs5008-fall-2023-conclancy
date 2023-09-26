@@ -17,7 +17,7 @@ bool isEmpty (int* s, int t) {
 
 bool isFull (int* s, int t) {
 	// returns true if no more room in the stack
-	if ((sizeof(s) / sizeof(s[0])) == MAXSIZE || t + 1 == MAXSIZE) {
+	if ((sizeof(s) / sizeof(s[0])) == MAXSIZE || t + 1 >= MAXSIZE) {
 		return true;
 	} else {
 		return false;
@@ -25,16 +25,31 @@ bool isFull (int* s, int t) {
 }
 
 void push(int v, int* s, int* tp) {
-  // put v onto the top of the stack s unless it is already full
+    // put v onto the top of the stack s unless it is already full
 
-  // INSERT YOUR CODE HERE
+    if (isFull(s, *tp)) {
+        printf("ERROR: stack is full, cannot push %d onto stack.\n", v);
+    } else {
+        *tp = *tp + 1;
+        s[*tp] = v;
+    }
 }
 
 int pop (int* s, int* tp) {
-  // return the top entry in the stack unless stack is empty
-  // update s and *tp -- requires top to be passed by reference!
+    // return the top entry in the stack unless stack is empty
+    // update s and *tp -- requires top to be passed by reference!
 
-  // INSERT YOUR CODE HERE
+    int returnval = 0;
+
+    if (isEmpty(s, *tp)) {
+        printf("ERROR: stack is empty, cannot pop from the stack.\n");
+    } else {
+        returnval = s[*tp];
+        *tp = *tp - 1;
+    }
+
+    return returnval;
+
 }
 
 int main () {
@@ -71,13 +86,13 @@ int main () {
   printf("1> %d\n",pop(stack1, &top1));
   printf("2> %d\n",pop(stack2, &top2));
   
-  // TESTS TODO 
+  // TESTS
 
-  printf("\n**Tests Begin Here**\n\n");
-  printf("test 1 - expected 1:%d\n", isEmpty(stack1, top1));
-  printf("test 2 - expected 0:%d\n", isEmpty(stack1, 1));
-  printf("test 3 - expected 1:%d\n", isFull(stack1, 99));
-  printf("test 4 - expected 0:%d\n", isFull(stack1, top1));
+  //printf("\n**Tests Begin Here**\n\n");
+  //printf("test 1 - expected 1:%d\n", isEmpty(stack1, top1));
+  //printf("test 2 - expected 0:%d\n", isEmpty(stack1, 1));
+  //printf("test 3 - expected 1:%d\n", isFull(stack1, 99));
+  //printf("test 4 - expected 0:%d\n", isFull(stack1, top1));
 
 
   return 0;
