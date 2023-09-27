@@ -1,5 +1,5 @@
-// name: <your name here>
-// email: <your email here>
+// name: Connor Clancy
+// email: clancy.co@northeastern.edu
 
 #include <stdio.h>   // stardard input/output library
 #include <stdbool.h> // standard boolean library: bool, true, false
@@ -92,16 +92,22 @@ void enqueue(queue_t* q_p, int d) {
   node_t* n_p = NULL; // temp node pointer
   
   if (q_p != NULL) {
+	// Create a new node to add to the queue
+	node_t* new_node = newNode(d); 
 
     if (isEmpty(q_p)) {
-      // queue is empty so insertion is easy
+      // queue is empty so insertion this node becomes both head and tail
 
-      // ***** INSERT YOUR CODE HERE *****
-      
+	q_p->head_p = new_node;
+	q_p->tail_p = new_node;
+
     } else {
       // queue is not empty
 
-      // ***** INSERT YOUR CODE HERE *****
+      	node_t* cur_tail_p = q_p->tail_p;
+	new_node->right_p = cur_tail_p;
+	q_p->tail_p->left_p = new_node;
+	q_p->tail_p = new_node; 
     } 
   }
   
@@ -184,6 +190,11 @@ int main () {
   }
 
   printf("\n");
+  printf("Finished enqueue\n\nEnque Testing:\n\n");
+  printf("Queue 1, Element 0: %d\n", q1_p->head_p->data);
+  printf("Queue 2, Element 0: %d\n", q2_p->head_p->data);
+  printf("Queue 1, Element 9: %d\n", q1_p->tail_p->data);
+  printf("Queue 2, Element 9: %d\n\n", q2_p->tail_p->data); 
 
   printf("dequeue[1]: ");
   while (!isEmpty(q1_p)) {
