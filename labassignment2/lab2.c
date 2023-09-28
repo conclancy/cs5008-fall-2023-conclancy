@@ -12,6 +12,7 @@ int isempty()
     else
         return 0;
 }
+
 /*-----To check if the queue is full----------*/
 int isfull()
 {
@@ -22,6 +23,7 @@ int isfull()
     return 0;
  
 }
+
 /*---- To see the data at the front of the queue---*/
 int peek(int *arr)
 {
@@ -32,19 +34,44 @@ int peek(int *arr)
     }
     return arr[0];
     }
+
 /*---To insert the elements into the queue------*/
-void enqueue(int data, int *arr)
-{
- //insert your code here
+void enqueue(int data, int *arr) {
 
- 
+    if (!isfull()) {
+    	rear += 1;
+	arr[rear] = data;
+	printf("New rear element is %d\n", rear);
+    } else {
+    	printf("ERROR: Queue is already full."); 
+    }
+    
+    return;
 }
+
 /*----Function to remove the elements from the queue----*/
-int dequeue(int *arr)
-{   
-    //insert your code here
+int dequeue(int *arr) {   
+    
+    if(isempty()) {
+    	printf("ERROR: Queue is empty.");
+	return -1;
+    } else if (rear == 0)  {
+    	int temp = arr[0];
+	arr[0] = NULL; 
+    }else {
+    	int temp = arr[0];
+
+	for(int i=1; i<N; i++) {
+	    arr[i-1] = arr[i];
+	    arr[i] = NULL;
+	}
+
+	rear -= 1;
+	return temp;
+    }
 
 }
+
 /*---Function to display the elements of the queue-------*/
 void display(int *arr)
 {
@@ -64,11 +91,13 @@ void display(int *arr)
     }
     printf("\n");
 }
+
+
 /*-----Main program-----*/
-int main()
-    {
+int main() {
     int arr[N];//array in which queue will live
-/* insert 8 items */
+    
+    /* insert 8 items */
     display(arr);
     enqueue(1,arr);
     enqueue(2,arr);
@@ -81,11 +110,14 @@ int main()
     enqueue(8,arr);
     display(arr);
     enqueue(9,arr);
+    
     for(int i=0;i<N-1;i++){
-    printf("dequeued element is: %d\n",dequeue(arr));
+    	printf("dequeued element is: %d\n",dequeue(arr));
     }
+
     display(arr);
     printf("The element at the front of the queue is: %d\n",peek(arr));
-return 0;
-    }
+    
+    return 0;
+}
 
