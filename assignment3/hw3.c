@@ -128,12 +128,15 @@ int dequeue(queue_t* q_p) {
       if (q_p->head_p  == q_p->tail_p) {      
 	// only one node in the queue, clear queue head and tail 
 
-	// ***** INSERT YOUR CODE HERE *****
+	q_p->head_p = NULL;
+	q_p->tail_p = NULL; 
 	
       } else {
 	// mulitple nodes in queue, clean up head pointer and new head of queue
 
-	// ***** INSERT YOUR CODE HERE *****
+	node_t* new_head_node = n_p->left_p;
+	q_p->head_p = new_head_node; 
+	new_head_node->right_p = NULL;
 
       }
 	
@@ -189,12 +192,12 @@ int main () {
     enqueue(q2_p, t);    
   }
 
-  printf("\n");
-  printf("Finished enqueue\n\nEnque Testing:\n\n");
-  printf("Queue 1, Element 0: %d\n", q1_p->head_p->data);
-  printf("Queue 2, Element 0: %d\n", q2_p->head_p->data);
-  printf("Queue 1, Element 9: %d\n", q1_p->tail_p->data);
-  printf("Queue 2, Element 9: %d\n\n", q2_p->tail_p->data); 
+  //printf("\n");
+  //printf("Finished enqueue\n\nEnque Testing:\n\n");
+  //printf("Queue 1, Element 0: %d\n", q1_p->head_p->data);
+  //printf("Queue 2, Element 0: %d\n", q2_p->head_p->data);
+  //printf("Queue 1, Element 9: %d\n", q1_p->tail_p->data);
+  //printf("Queue 2, Element 9: %d\n\n", q2_p->tail_p->data); 
 
   printf("dequeue[1]: ");
   while (!isEmpty(q1_p)) {
