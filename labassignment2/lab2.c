@@ -43,7 +43,7 @@ void enqueue(int data, int *arr) {
 	arr[rear] = data;
 	printf("New rear element is %d\n", rear);
     } else {
-    	printf("ERROR: Queue is already full."); 
+    	printf("ERROR: Queue is already full.\n"); 
     }
     
     return;
