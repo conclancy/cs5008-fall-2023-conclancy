@@ -48,18 +48,42 @@ int main(){
   //selection sort
   for (i=0; i<LIMIT; i++) {
 
-    // INSERT YOUR CODE HERE
-    
+    // set variables 
+    smallest = RAND_RANGE + 1;
+    int temp_index = -1;
+
+    // iterate every element in the list to find smallest 
+    for (j=0; j<LIMIT; j++) {
+
+        // store the smallest current element and its index
+        if(source[j] < smallest) {
+            smallest = source[j];
+            temp_index = j;
+        }
+
+    }
+
+    // after identifying smallest current element, write to
+    // the destination list and set the index in the original list 
+    // out of range for iteration. 
+    dest[i] = smallest;
+    source[temp_index] = RAND_RANGE + 1;  
   }
   
   //print out sorted array in rows of 10
   printf("Destination array:\n");
   
+  // iterate over every element in the destination list 
+  for (i=0; i<LIMIT; i++) {
 
-  // INSERT YOUR CODE HERE
-    
- 
-  
+      // print out each element with a trailing space
+      printf("%d ", dest[i]);
+
+      // if there are 10 elements in the row, start a new line
+      if((i + 1) % 10 == 0) {
+          printf("\n");
+      }
+  }
   
   return 0;
 }
