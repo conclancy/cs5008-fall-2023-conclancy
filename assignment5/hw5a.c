@@ -1,5 +1,5 @@
-// name: <your name here>
-// email: <your email here>
+// name: Connor Clancy
+// email: clancy.co@neu.edu
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -39,7 +39,18 @@ void mergeIt(
 	   int rightStop) {
   
 
-  // ADD YOUR CODE HERE
+  // create temporary arrays to hold in process data
+  int left[leftStop];
+  int right[rightStop];
+
+  // move data into arrays 
+  for (int l=0; l<leftStop; l++) {
+	  left[l] = data[leftStart + l];
+  }
+
+  for (int r=0; r<rightStop; r++) {
+	  right[r] = data[rightStart + r];
+  }
   
   return;
 }
