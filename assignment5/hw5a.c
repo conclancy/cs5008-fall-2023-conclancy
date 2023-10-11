@@ -7,7 +7,7 @@
 #include <time.h>
 
 #define LIMIT 200
-#define RAND_RANGE 95  // 95 printing characters x20-x7E
+#define RAND_RANGE 95// 95 printing characters x20-x7E
 
 // return random character
 char randChar() {
@@ -22,7 +22,9 @@ char randChar() {
 // return location mid way between left and right
 int midPoint(int left, int right){
   // note integer division always returns an integer
-  return( left + (right-left)/2 );
+  int mid = left + (right-left)/2;
+  printf("\nmidpoint: %.d", mid);
+  return mid;
 }
 
 // min of two integers
@@ -37,19 +39,52 @@ void mergeIt(
 	   int leftStop,
 	   int rightStart,
 	   int rightStop) {
-  
+ 
+  // TODO 
+  printf("\nleftStart: %.d\n", leftStart);
+  printf("leftStop:  %.d\n", leftStop);	  
 
   // create temporary arrays to hold in process data
   int left[leftStop];
   int right[rightStop];
 
+  printf("temp arrays created\n");
+
   // move data into arrays 
   for (int l=0; l<leftStop; l++) {
+	  printf("left %.d: %.d\n", l, data[leftStart + l]);
 	  left[l] = data[leftStart + l];
   }
 
   for (int r=0; r<rightStop; r++) {
 	  right[r] = data[rightStart + r];
+  }
+
+  // merge arrays 
+  int index = 0;
+  while (leftStart < leftStop && rightStart < rightStop) {
+	  if(left[leftStart] <= right[rightStart]) {
+		  data[index] = left[leftStart];
+		  leftStart++;
+	  } else {
+		  data[index] = right[rightStart];
+		  rightStart++;
+	  }
+	  index++;
+  }
+
+  // merge final elements of left if there are any
+  while (index < leftStop) {
+	  data[index] = left[leftStart];
+	  leftStart++;
+	  index++;
+  }
+
+  // merge final elements of right if there are any
+  while (index < rightStop) {
+	  data[index] = right[rightStart];
+	  rightStart++;
+	  leftStart++;
   }
   
   return;
