@@ -23,7 +23,6 @@ char randChar() {
 int midPoint(int left, int right){
   // note integer division always returns an integer
   int mid = left + (right-left)/2;
-  printf("\nmidpoint: %.d", mid);
   return mid;
 }
 
@@ -34,40 +33,35 @@ int findMin(int a, int b){
 
 // merge two sorted sub arrays
 void mergeIt(
-	   char* data,
-	   int leftStart,
-	   int leftStop,
-	   int rightStart,
-	   int rightStop) {
- 
-  // TODO 
-  printf("\nleftStart: %.d\n", leftStart);
-  printf("leftStop:  %.d\n", leftStop);	  
+	  char* data,
+	  int leftStart,
+	  int leftStop,
+	  int rightStart,
+	  int rightStop) {
 
-  // create temporary arrays to hold in process data
-  int left[leftStop];
-  int right[rightStop];
-
-  printf("temp arrays created\n");
+  // create function variables
+  int leftLength = leftStop + 1;
+  int rightLength = rightStop - rightStart + 1; // create variable to hold length of right array
+  int leftArr[leftLength];                      // create the left array
+  int rightArr[rightLength];                    // create the right array
+  int index = leftStart;                        // holds index for next number in merged array
 
   // move data into arrays 
-  for (int l=0; l<leftStop; l++) {
-	  printf("left %.d: %.d\n", l, data[leftStart + l]);
-	  left[l] = data[leftStart + l];
+  for (int l=0; l<leftLength; l++) {
+	  leftArr[l] = data[leftStart + l];
   }
 
-  for (int r=0; r<rightStop; r++) {
-	  right[r] = data[rightStart + r];
+  for (int r=0; r<(rightLength); r++) {
+	  rightArr[r] = data[rightStart + r];
   }
 
   // merge arrays 
-  int index = 0;
   while (leftStart < leftStop && rightStart < rightStop) {
-	  if(left[leftStart] <= right[rightStart]) {
-		  data[index] = left[leftStart];
+	  if(leftArr[leftStart] <= rightArr[rightStart]) {
+		  data[index] = leftArr[leftStart];
 		  leftStart++;
 	  } else {
-		  data[index] = right[rightStart];
+		  data[index] = rightArr[rightStart];
 		  rightStart++;
 	  }
 	  index++;
@@ -75,16 +69,16 @@ void mergeIt(
 
   // merge final elements of left if there are any
   while (index < leftStop) {
-	  data[index] = left[leftStart];
+	  data[index] = leftArr[leftStart];
 	  leftStart++;
 	  index++;
   }
 
   // merge final elements of right if there are any
   while (index < rightStop) {
-	  data[index] = right[rightStart];
+	  data[index] = rightArr[rightStart];
 	  rightStart++;
-	  leftStart++;
+	  index++;
   }
   
   return;
