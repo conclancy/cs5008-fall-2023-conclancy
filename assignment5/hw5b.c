@@ -43,11 +43,11 @@ void quicky(char* data, int left, int right) {
 
     while (i <= j) {
      
-      while (data[i] < pivot) {
+      while (upperChar(data[i]) < upperChar(pivot)) {
         i++;
       }
 
-      while (data[j] > pivot) {
+      while (upperChar(data[j]) > upperChar(pivot)) {
 	j--;
       }
       
