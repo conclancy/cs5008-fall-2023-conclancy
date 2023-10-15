@@ -31,56 +31,38 @@ int findMin(int a, int b){
   if (a<=b) {return a;} else {return b;}
 }
 
-// merge two sorted sub arrays
+
+// Merge two sorted subarrays
 void mergeIt(
-	  char* data,
-	  int leftStart,
-	  int leftStop,
-	  int rightStart,
-	  int rightStop) {
+  char* data, 
+  int leftStart, 
+  int leftStop, 
+  int rightStart, 
+  int rightStop) {
 
-  // create function variables
-  int leftLength = leftStop + 1;
-  int rightLength = rightStop - rightStart + 1; // create variable to hold length of right array
-  int leftArr[leftLength];                      // create the left array
-  int rightArr[rightLength];                    // create the right array
-  int index = leftStart;                        // holds index for next number in merged array
+  int size = LIMIT;
+  char* temp[size];
+  int left = leftStart;
+  int right = rightStart;
 
-  // move data into arrays 
-  for (int l=0; l<leftLength; l++) {
-	  leftArr[l] = data[leftStart + l];
+  // Merge the two subarrays into a temporary array
+  for (int i = leftStart; i <= rightStop; i++) {
+    if (left > leftStop) {
+      temp[i] = data[right++];
+    } else if (right > rightStop) {
+      temp[i] = data[left++];
+    } else if (data[left] < data[right]) {
+      temp[i] = data[left++];
+    } else {
+      temp[i] = data[right++];
+    }
   }
 
-  for (int r=0; r<(rightLength); r++) {
-	  rightArr[r] = data[rightStart + r];
+  // Copy the merged elements back to the original array
+  for (int i = leftStart; i <= rightStop; i++) {
+    data[i] = temp[i];
   }
 
-  // merge arrays 
-  while (leftStart < leftStop && rightStart < rightStop) {
-	  if(leftArr[leftStart] <= rightArr[rightStart]) {
-		  data[index] = leftArr[leftStart];
-		  leftStart++;
-	  } else {
-		  data[index] = rightArr[rightStart];
-		  rightStart++;
-	  }
-	  index++;
-  }
-
-  // merge final elements of left if there are any
-  while (index < leftStop) {
-	  data[index] = leftArr[leftStart];
-	  leftStart++;
-	  index++;
-  }
-
-  // merge final elements of right if there are any
-  while (index < rightStop) {
-	  data[index] = rightArr[rightStart];
-	  rightStart++;
-	  index++;
-  }
-  
   return;
 }
 
