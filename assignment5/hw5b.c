@@ -1,5 +1,5 @@
-// name: <your name here>
-// email: <your email here>
+// name: Connor Clancy
+// email: clancy.co@neu.edu
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -36,7 +36,35 @@ char upperChar(char c){
 // pick pivot and then sort small and big parts 
 void quicky(char* data, int left, int right) {
 
-  // ADD YOUR CODE HERE
+  if(left < right) {
+    char pivot = data[right];
+    int i = left;
+    int j = right; 
+
+    while (i <= j) {
+     
+      while (data[i] < pivot) {
+        i++;
+      }
+
+      while (data[j] > pivot) {
+	j--;
+      }
+      
+      if (i <= j) {
+	char temp = data[i];
+	data[i] = data[j];
+	data[j] = temp;
+	i++;
+	j--;
+      }
+
+    }
+
+    //sort elements before and after the pivot
+    quicky(data, left, j);
+    quicky(data, i, right); 
+  }
 
   return;
 }
