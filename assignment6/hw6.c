@@ -243,8 +243,26 @@ void freeQueue(queue_t* qp) {
 // void breadthFirst (tnode_t* np) {}
 
 void preorder (tnode_t* np) {
-  // INSERT YOUR CODE HERE
+  
+  // handle NULL tree
+  if (np == NULL) {
+    return;
+  }
 
+  // process current node 
+  printf("%c", np->data);
+
+  // handle non-null left node 
+  if (np->left != NULL) {
+    preorder(np->left);
+  }
+
+  // handle non-null right node
+  if(np->right != NULL) {
+    preorder(np->right);
+  }
+
+  // escape recursion
   return;
 }
 
