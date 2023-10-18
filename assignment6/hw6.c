@@ -290,8 +290,25 @@ void inorder (tnode_t* np) {
 }
 
 void postorder (tnode_t* np) {
-  // INSERT YOUR CODE HERE
-  
+    // handle NULL tree
+  if (np == NULL) {
+    return;
+  }
+
+  // handle non-null left node 
+  if (np->left != NULL) {
+    postorder(np->left);
+  }
+
+    // handle non-null right node
+  if(np->right != NULL) {
+    postorder(np->right);
+  }
+
+  // process current node 
+  printf("%c", np->data);
+
+  // escape recursion
   return;
 }
 
