@@ -1,30 +1,39 @@
-//enter your name and email here
+// name: Connor Clancy
+// email: clancy.co@neu.edu
+
 #include<stdio.h>
 #include<stdlib.h>
-typedef struct node
-{
+
+typedef struct node {
     int data;
     struct node *next;
-}node_t;
+} node_t;
 
-typedef struct list{
+typedef struct list {
     struct node* head;
-}List;
+} List;
 
 /*-----creating the nodes----------*/
-node_t* newNode(int num)
-{
- 
+// take an integer and create a new node from it
+node_t* newNode(int num) {
+    node_t* new_node = (node_t*)malloc(sizeof(node_t));
+    new_node -> data = num;
+    new_node -> next = NULL;
+    return new_node;
 }
+
 /*---creating linked list----*/
 List* init_LL(){
-    
+    List* list = (List*)malloc(sizeof(List));
+    list -> head = NULL;
+    return list;
 }
 
 /*---Insert the nodes at the begining of the list---*/
 void insertFirst(List* l, int data){
-    
-
+    node_t* new_node = newNode(data);
+    new_node -> next = l -> head; 
+    l -> head = new_node;
 }
 
 /*----display the output--------*/
@@ -41,15 +50,19 @@ void display(List* l)
 }
 
 /*-------reversing the linked list using recursion------*/
-void reverse(List* l, node_t* ptr)
-{
-    
-    
-    
-    
-//insert your code here
-    
-    
+void reverse(List* l, node_t* ptr) {
+    if (ptr == NULL) {
+        return;
+    }
+
+    if(ptr -> next == NULL) {
+        l -> head = ptr;
+        return;
+    }
+
+    reverse(l, ptr -> next);
+    ptr -> next -> next = ptr; 
+    ptr -> next = NULL;
 }
 
 /*----Free the nodes-----*/
