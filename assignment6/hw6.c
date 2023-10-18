@@ -314,8 +314,28 @@ void postorder (tnode_t* np) {
 
 
 void breadthFirst (tnode_t* root) {
-  // INSERT YOUR CODE HERE
-  
+
+  tnode_t* nodeTemp = NULL;
+  queue_t* queueTree =  newQueue(); 
+
+  if(root != NULL) {
+    enqueue(queueTree, root);
+    while(!isEmpty(queueTree)) {
+      nodeTemp = dequeue(queueTree);
+      printf("%c", nodeTemp->data);
+
+      // add left node for processing
+      if(nodeTemp->left != NULL) {
+        enqueue(queueTree, nodeTemp->left);
+      }
+
+      //add right node for processing
+      if(nodeTemp->right != NULL) {
+        enqueue(queueTree, nodeTemp->right);
+      }
+    }
+  }
+
   return;
 }
 
