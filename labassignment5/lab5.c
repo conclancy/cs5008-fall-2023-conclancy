@@ -17,7 +17,7 @@ typedef struct AVL {
     struct avlnode* root;
 } Tree;
 
-/* creating a new Avl node*/
+/* creating a new Avl node */
 node_t* newNode(int data) {
 
     node_t* temp = (node_t*)malloc(sizeof(node_t));
@@ -47,7 +47,7 @@ Tree* initTree() {
 
 
 /* calculating maximum of 2 numbers*/
-int max(int a,int b) {
+int max(int a, int b) {
 
     if(a>b) {
         return a;
@@ -132,25 +132,35 @@ void freeNode(node_t *p) {
 /* Insert a node like a Binary search tree, then convert it into a AVL tree using four cases*/
 node_t* insert(node_t* root, int data) {
     
+    // base case for empty tree
+    if (root == NULL) {
+        return newNode(data);
+    }
     
-/*Insert your Code here*/
-
-
-
-
-    
-/*updating the height after insertion of the node*/
+    // add data to the tree
+    if (data < root->data) {
+        // if the data is smaller than the root, add left 
+        root->left = insert(root->left, data);
+    } else if (data > root->data) {
+        // if the data is larger than the root, add right 
+        root->right = insert(root->right, data);
+    } else if (data == root->data) {
+        // if the data is a duplicate
+        return root; 
+    }
+        
+    /*updating the height after insertion of the node*/
     root->height = max(height(root->left),height(root->right))+1;
-    
-/*checking the balance factor to check the tree is balanced */
+        
+    /*checking the balance factor to check the tree is balanced*/
     int balancefactor = balance(root);
 
-    /* left- left case*/
+    /*Left Left case*/
     if(balancefactor > 1 && data < root->left->data) {
         return rightRotate(root);
     }
 
-    /* Right Right Case*/
+    /*Right Right Case*/
     if(balancefactor < -1 && data > root->right->data) {
         return leftRotate(root);
     }
@@ -161,7 +171,7 @@ node_t* insert(node_t* root, int data) {
         return rightRotate(root);
     }
 
-    /* Right Left Case*/
+    /*Right Left Case*/
     if(balancefactor < -1 && data < root->right->data) {
         root->right = rightRotate(root->right);
         return leftRotate(root);
