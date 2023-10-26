@@ -5,7 +5,7 @@
 #include <string.h>
 #include <ctype.h>
 
-/* function to encrypt the data*/
+/*function to encrypt the data*/
 void encrypt(char text[], int key)
 {
     for(int i = 0; text[i] != '\0'; i++) {
@@ -29,7 +29,7 @@ int main()
 {
     char text[20] ;
     int keyvalue=3;
-    /*Input string */
+    /*Input string*/
     printf("Enter the message:  ");
     scanf("%s",text);
     printf("text input   = %s\n",text);
