@@ -1,5 +1,5 @@
-//enter your name here
-//enter your email here
+// Connor Clancy
+// clancy.co@neu.edu
 
 #include <stdio.h>
 #include <string.h>
@@ -8,15 +8,19 @@
 /* function to encrypt the data*/
 void encrypt(char text[], int key)
 {
-    //insert your code here
+    for(int i = 0; text[i] != '\0'; i++) {
+        if(text[i] >= 'A' && text[i] <= 'Z') {
+            text[i] = 'A' + (text[i] - 'A' + key) % 26;
+        } else if(text[i] >= 'a' && text[i] <= 'z') {
+            text[i] = 'a' + (text[i] - 'a' + key) % 26;
+        }
+    }
 }
 
 /*function to decrypt the data*/
 void decrypt(char text[],int key)
 {
-    
-    //insert your code here
-    
+    encrypt(text, -key);
 }
 
 
