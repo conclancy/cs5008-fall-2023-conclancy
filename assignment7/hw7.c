@@ -1,5 +1,5 @@
-// name: <your name here>
-// email: <your email here>
+// name: Connor Clancy
+// email: clancy.co@neu.edu
 
 // format of document is a bunch of data lines beginning with an integer (rank which we ignore)
 // then a ',' followed by a double-quoted string (city name)
@@ -121,21 +121,39 @@ int stateMachine(int inState, int nextChar, char* temp, char* inputLine, int* li
     break;
          
   case S4:
-
-    // *** YOUR CODE GOES HERE ***
-    
+    // accept anything until you find a comma 
+    if (inputLine[nextChar] == ',') {
+      state = S5;
+    } else {
+      state = ERRORSTATE;
+    }
     break;
          
   case S5:
-
-    // *** YOUR CODE GOES HERE ***
-    
+    // accept double quote to start population data
+    if (inputLine[nextChar] == '\"') {
+        state = S6;
+    } else {
+        state = ERRORSTATE;
+    }
     break;
          
   case S6:
-
-    // *** YOUR CODE GOES HERE ***
-    
+    // accept digits to build population data; terminated by double quote
+    if (isDigit(inputLine[nextChar])) {
+      // append next int
+      state = S6;
+      appendChar(temp, inputLine[nextChar]);
+    } else if (inputLine[nextChar] == ',') {
+      // skip commas seperating digits
+      state = S6;
+    } else if (inputLine[nextChar] == '\"') {
+      // convert the population string to an integer
+      sscanf(temp, "%d", popInt_p); 
+      state = ACCEPTSTATE;
+    } else {
+      state = ERRORSTATE;
+    }
     break;
          
   case ACCEPTSTATE:
@@ -156,7 +174,7 @@ int main () {
   char inputLine[MAXSTRING];   // temporary string to hold input line
   char cityStr[MAXSTRING];     // city name
   int  lineNum;                // line number (city rank)
-  int  popInt;                 // population
+  int  popInt = 0;                 // population
   int  state;                  // FSM state
   int  nextChar;               // index of next character in input string
   char temp[MAXSTRING];        // temp string to build up extracted strings from input characters
