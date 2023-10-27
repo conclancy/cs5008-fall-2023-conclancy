@@ -174,7 +174,7 @@ int main () {
   char inputLine[MAXSTRING];   // temporary string to hold input line
   char cityStr[MAXSTRING];     // city name
   int  lineNum;                // line number (city rank)
-  int  popInt = 0;                 // population
+  int  popInt;                 // population
   int  state;                  // FSM state
   int  nextChar;               // index of next character in input string
   char temp[MAXSTRING];        // temp string to build up extracted strings from input characters
