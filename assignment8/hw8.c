@@ -1,5 +1,5 @@
-// name: <your name here>
-// email: <your email here>
+// name: Connor Clancy
+// email: clancy.co@neu.edu
 
 // format of document is a bunch of data lines beginning with an integer (rank which we ignore)
 // then a ',' followed by a double-quoted string (city name)
@@ -61,8 +61,8 @@ int hash1(char* s) {
   return (strlen(s) % HASHSIZE);
 }
 
-// hash 2 is the sum of the char codes of string -
-// hint: use (int)s[i] to get the integer code of  character in s[i]
+// hash 2 is the sum of the char codes of string
+// hint: use (int)s[i] to get the integer code of character in s[i]
 int hash2(char* s) {
   int sumOfS = 0;
 
@@ -71,7 +71,7 @@ int hash2(char* s) {
   return (sumOfS % HASHSIZE);
 }
 
-// hash 3 is the prioduct of the first two char codes of string
+// hash 3 is the product of the first two char codes of string
 int hash3(char* s) {
   long productOfS = 1;
 
@@ -96,7 +96,7 @@ bool addToHashTable(keyvalue_t* t[], int loc, char* k, int v) {
 }
 
 // print the linked list pointed to by p
-void printHashList(keyvalue_t* p){
+void printHashList(keyvalue_t* p) {
   while (p != NULL) {
     printf("key/value: [%s] / [%d]\n",p->key,p->value);
     p = p->next;
@@ -122,7 +122,7 @@ void printHashTable(keyvalue_t* t[]) {
 // free the hash list in table ht location i
 void freeHashList(keyvalue_t* ht[], int i){
   keyvalue_t* t;
-  while (ht[i] != NULL){
+  while (ht[i] != NULL) {
     t = ht[i];
     ht[i] = ht[i]->next;
     freeKeyValue(t);
@@ -183,24 +183,24 @@ int main () {
   if (fp != NULL) {
     fgets(inputLine, MAXSTRING, fp); // prime the pump for the first line
 
-    while (feof(fp) == 0){
+    while (feof(fp) == 0) {
 
       nextChar = 0;
       state = STARTSTATE; 
       strcpy(temp,"");
 
       if (nextChar >= strlen(inputLine)){
-	// if no input string then go to ERRORSTATE
-	state = ERRORSTATE;
+        // if no input string then go to ERRORSTATE
+        state = ERRORSTATE;
       } 
 
       // read input, a line at a time and use FSM to parse the input
       while ((state != ERRORSTATE) && (state != ACCEPTSTATE)) {
 	
-	state = stateMachine(state, nextChar, temp, inputLine, &lineNum, &popInt, cityStr);
+        state = stateMachine(state, nextChar, temp, inputLine, &lineNum, &popInt, cityStr);
 
-	// advance input
-	nextChar++;
+        // advance input
+        nextChar++;
 	
       }	// end while state machine loop
 	  
