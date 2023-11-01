@@ -90,8 +90,26 @@ int hash3(char* s) {
 bool addToHashTable(keyvalue_t* t[], int loc, char* k, int v) {
   bool result = true;
 
-  //**** YOUR CODE GOES HERE ****
+  keyvalue_t* newPair = newKeyValue(k, v);
 
+  if (newPair == NULL) {
+    // Failed to allocate memory for the new pair
+    result = false;
+  } else {
+    // Check if there's already a key-value pair at the specified location
+    if (t[loc] == NULL) {
+      // No collision, insert the new pair directly
+      t[loc] = newPair;
+    } else {
+      // Collision occurred, add the new pair to the linked list
+      keyvalue_t* current = t[loc];
+      while (current->next != NULL) {
+        current = current->next;
+      }
+      current->next = newPair;
+    }
+  }
+  
   return result;
 }
 
