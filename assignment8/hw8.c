@@ -79,7 +79,7 @@ int hash2(char* s) {
 int hash3(char* s) {
   long productOfS = 1;
 
-  //**** YOUR CODE GOES HERE ****
+  productOfS = s[0] + s[1];
 
   return ((int)(productOfS % HASHSIZE));
 }
