@@ -65,8 +65,12 @@ int hash1(char* s) {
 // hint: use (int)s[i] to get the integer code of character in s[i]
 int hash2(char* s) {
   int sumOfS = 0;
+  int i = 0;
 
-  //**** YOUR CODE GOES HERE ****
+  while(s[i] != '\0') {
+    sumOfS += s[i];
+    i++;
+  }
 
   return (sumOfS % HASHSIZE);
 }
