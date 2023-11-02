@@ -18,7 +18,7 @@ typedef struct node {
 /* Inserting patients in the queue based on priority*/
 node_t *insert(struct node *front) {
 
-    node_t *p,*temp;
+    node_t *p, *temp;
     char name[20],address[100];
     temp=(node_t*)malloc(sizeof(node_t));
     printf("Enter patient Name:");
@@ -33,15 +33,41 @@ node_t *insert(struct node *front) {
     scanf("%d",&(temp->priority));
     int pri=temp->priority;
 
-    /*insert your code here*/
+    if (front == NULL || temp->priority > front->priority) {
+        temp->next = front;
+        return temp;
+    } 
 
+    node_t *prev, *curr;
+    prev = NULL; 
+    curr = front;
+    
+    while (curr != NULL && temp->priority <= curr->priority) {
+        prev = curr;
+        curr = curr->next;
+    }
+
+   if (prev != NULL) {
+        prev->next = temp;
+        temp->next = curr;
+    }
+
+    return front;
 
 }
 
 /* Delete the node which is present at the front*/
 node_t *delete(struct node *front) {
     
-    /*Insert your code here*/
+    if(front == NULL) {
+        return front;
+    }
+
+    node_t *temp = front;
+    front = front->next;
+    free(temp);
+
+    return front;
             
 }
 
@@ -53,13 +79,12 @@ void display(node_t *front) {
     else
     {
         printf("\nPriority wise appointments are:\n");
-        while(temp!=NULL)
-        {
-        printf("The name of patient is:%s\n",temp->name);
-        printf("The age of patient is:%d\n",temp->age);
-        printf("The address of patient is : %s\n",temp->address);
-        printf("---------------------------------------------------\n");
-        temp=temp->next;
+        while(temp!=NULL) {
+            printf("The name of patient is:%s\n",temp->name);
+            printf("The age of patient is:%d\n",temp->age);
+            printf("The address of patient is : %s\n",temp->address);
+            printf("---------------------------------------------------\n");
+            temp=temp->next;
         }
     }
     return;
@@ -68,8 +93,8 @@ void display(node_t *front) {
 /* Function to free the nodes*/
 void freenode(node_t *temp) {
     if(temp!=NULL){
-    freenode(temp->next);
-    free(temp);
+        freenode(temp->next);
+        free(temp);
     }
 }
 
@@ -84,24 +109,23 @@ int main() {
         printf("\t\t\t3.PATIENTS WAITING IN THE QUEUE\n");
         printf("\t\t\tEnter your choice:");
         scanf("%d",&option);
-            switch(option)
-            {
-            /*Select 1 to insert elements in the priority queue*/
-            case 1:
-            front= insert(front);
-            break;
-             /* Select 2 to delete the elements at the front of priority queue*/
-            case 2:
-            front= delete(front);
-            break;
-            /* Select 3 To display the elements present in the priority queue*/
-            case 3:
-            display(front);
-            break;
-            /* Select 4 to terminate*/
-            case 4:
-            printf("The program is being terminated\n");
-            break;
+            switch(option) {
+                /*Select 1 to insert elements in the priority queue*/
+                case 1:
+                front = insert(front);
+                break;
+                /* Select 2 to delete the elements at the front of priority queue*/
+                case 2:
+                front = delete(front);
+                break;
+                /* Select 3 To display the elements present in the priority queue*/
+                case 3:
+                display(front);
+                break;
+                /* Select 4 to terminate*/
+                case 4:
+                printf("The program is being terminated\n");
+                break;
             }
     }
     while(option!=4);
