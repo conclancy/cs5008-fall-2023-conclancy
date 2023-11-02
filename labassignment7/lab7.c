@@ -1,23 +1,22 @@
 
-/*Enter your name here*/
-/* Enter your email here*/
+// name: Connor Clancy
+// email: clancy.co@neu.edu
+
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
 
-typedef struct node
-{
+typedef struct node {
     char name[20];
     int age;
     char address[100];
     int reg;
     int priority;
     struct node *next;
-}node_t;
+} node_t;
 
 /* Inserting patients in the queue based on priority*/
-node_t *insert(struct node *front)
-{
+node_t *insert(struct node *front) {
 
     node_t *p,*temp;
     char name[20],address[100];
@@ -34,22 +33,20 @@ node_t *insert(struct node *front)
     scanf("%d",&(temp->priority));
     int pri=temp->priority;
 
- /*insert your code here*/
+    /*insert your code here*/
 
 
 }
 
 /* Delete the node which is present at the front*/
-node_t *delete(struct node *front)
-{
+node_t *delete(struct node *front) {
     
     /*Insert your code here*/
             
 }
 
 /* To display the patients records */
-void display(node_t *front)
-{
+void display(node_t *front) {
     node_t *temp=front;
     if(front==NULL)
     printf("\nTHERE IS NO PATIENT");
@@ -67,17 +64,17 @@ void display(node_t *front)
     }
     return;
 }
+
 /* Function to free the nodes*/
-void freenode(node_t *temp)
-{
+void freenode(node_t *temp) {
     if(temp!=NULL){
     freenode(temp->next);
     free(temp);
     }
 }
+
 /*-----------------Main program---------------------------*/
-int main()
-{
+int main() {
     node_t *front=NULL;
     int option;
     do{
