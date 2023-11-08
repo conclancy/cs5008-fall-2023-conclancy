@@ -228,17 +228,24 @@ int main () {
   printf("\nBREADTH FIRST TRAFERSAL\n");
   while (!isEmpty(q)) {
 
+    // process the next node in the queue
     current = dequeue(q);
 
     if (!done[current]) {
-        printf("NODE: %d\n", current);
-        done[current] = true;
 
-        for (j = 0; j < GSIZE; j++) {
-            if (E[current][j] && !done[j]) {
-                enqueue(q, j);
-            }
+      // print the current node
+      printf("NODE: %d\n", current);
+
+      // mark current node as processed 
+      done[current] = true;
+
+      // traverse adjacent nodes
+      for (j = 0; j < GSIZE; j++) {
+        // add unvisited nodes to the queue
+        if (E[current][j] && !done[j]) {
+          enqueue(q, j);
         }
+      }
     }
 
   }
