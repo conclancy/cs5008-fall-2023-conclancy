@@ -1,5 +1,5 @@
-// name: <your name here>
-// email: <your email here>
+// name: Connor Clancy
+// email: clancy.co@neu.edu
 
 
 #include <stdio.h>
@@ -228,8 +228,19 @@ int main () {
   printf("\nBREADTH FIRST TRAFERSAL\n");
   while (!isEmpty(q)) {
 
-    // INSERT YOUR CODE HERE
-    
+    current = dequeue(q);
+
+    if (!done[current]) {
+        printf("NODE: %d\n", current);
+        done[current] = true;
+
+        for (j = 0; j < GSIZE; j++) {
+            if (E[current][j] && !done[j]) {
+                enqueue(q, j);
+            }
+        }
+    }
+
   }
 
   // print out nodes that are unreachable
