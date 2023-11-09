@@ -51,14 +51,31 @@ void heapify(pq*p2,int n, int i ) {
     int lchild=2*i+1;/*left =2*i+1*/
     int rchild=2*i+2;/*right=2*i+2*/
     
-        /*insert your code here*/
+    if (lchild < n && p2->heap[lchild].priority > p2->heap[largest].priority) {
+        largest = lchild;
+    }
 
+    if (rchild < n && p2->heap[rchild].priority > p2->heap[largest].priority) {
+        largest = rchild;
+    }
+
+    if (largest != i) {
+        swap(&p2->heap[i], &p2->heap[largest]);
+        heapify(p2, n, largest);
+    }
 }
 
 /* To shift the new node (inserted at the end) up at its appropriate position in order to satisfy the max heap property */ 
 void shiftUp(pq* p2,int i) {
-    
-    /*insert your code here*/
+   while (i > 0) {
+        int parent = (i - 1) / 2;
+        if (p2->heap[i].priority > p2->heap[parent].priority) {
+            swap(&p2->heap[i], &p2->heap[parent]);
+            i = parent;
+        } else {
+            break;
+        }
+    }
 }
  
 /*function to insert patient info into the heap*/
@@ -99,7 +116,7 @@ void extractmax(pq* p2) {
     printf("The address of patient is : %s\n",p2->heap[0].address);
     printf("---------------------------------------------------\n");
     /* shift the element at the end to first position*/
-    p2->heap[0]=p2->heap[p2->num];
+    p2->heap[0]=p2->heap[p2->num-1]; 
     /*reduce the size of heap and decrement the array index*/
     p2->num--;
     top--;
