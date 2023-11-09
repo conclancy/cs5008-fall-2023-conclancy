@@ -20,14 +20,25 @@ typedef struct Graph
 /*A function to create a newnode*/
 node* createNode(char* name)
 {
-      
+    node* newNode = (node*)malloc(sizeof(node));
+    strcpy(newNode->name, name);
+    newNode->next = NULL;
 }
 
 /*A function to create a graph with an array of adjacency lists which is= numberof vertices*/
 Graph* createGraph(int vertices)
 {
+    Graph* graph = (Graph*)malloc(sizeof(Graph));
+    graph->numberOfVertices = vertices;
+    graph->adjLists = (struct node**)malloc(vertices * sizeof(struct node*));
     
-    
+    int i;
+
+    for(i=0; i<vertices; i++) {
+        graph->adjLists[i]=NULL; // initialization of pointers 
+    }
+
+    return graph;
 }
 
 /* function to count Number of listspresent in the graph */
