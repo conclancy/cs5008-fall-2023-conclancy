@@ -44,13 +44,29 @@ Graph* createGraph(int vertices)
 /* function to count Number of listspresent in the graph */
 int countNumberofLists(Graph* graph)
 {
+    int i, j=0;
     
+    for(i=0; i<graph->numberOfVertices; i++) {
+        if(graph->adjLists[i] != NULL) {
+            j++;
+        }
+    }
+
+    return j;
     
 }
 /*searching the persons who are already there in the list*/
 int search(char* name, Graph* graph)
 {
-    
+    int i;
+
+    for (i=0; i<countNumberofLists(graph); i++) {
+        if(strcmp(graph->adjLists[i]->name, name) == 0) {
+            return i;
+        }
+    }
+
+    return -1;
 }
 /*adds an edge to an undirected graph*/
 void addConnection(Graph* graph, char* person, char* friend){
