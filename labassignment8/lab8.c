@@ -52,7 +52,6 @@ int countNumberofLists(Graph* graph) {
     }
 
     return j;
-    
 }
 
 /* searching the persons who are already there in the list */
