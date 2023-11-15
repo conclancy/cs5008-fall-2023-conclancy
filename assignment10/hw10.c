@@ -1,5 +1,5 @@
-// name: <your name here>
-// email: <your email here>
+// name: Connor Clancy
+// email: clancy.co@neu.edu
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -96,7 +96,7 @@ void printTable(trow_t table[], int size, int start) {
 }
 
 // debug print the graph
-void printGraph(graph_t G, int size){
+void printGraph(graph_t G, int size) {
   int i, j;
 
   printf("\nGRAPH\n");
