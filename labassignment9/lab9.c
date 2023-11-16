@@ -83,7 +83,7 @@ int find_indegree(int arr[][MAX], int node,int n) {
 
     // count the number of incoming edges
     for(i=1; i<n; i++) {
-        if(arr[i][node]) {
+        if(arr[i][node] == 1) {
             indeg++;
         }
     }
@@ -97,7 +97,7 @@ void topologicalOrder(int arr[][MAX], Queue *t, int n) {
     int j=0, delNode, i;
     int result[MAX], indeg[MAX];
 
-    for (i = 1; i < n; i++) {
+    for (i = 1; i <= n; i++) {
         indeg[i] = find_indegree(arr, i, n);
         if (indeg[i] == 0) {
             enqueue(t, i);
@@ -120,12 +120,8 @@ void topologicalOrder(int arr[][MAX], Queue *t, int n) {
     }
     
     printf("topological ordering\n");
-    //for(i=0; i<j;i++)
-    //    printf("%d\t",result[i]);
-    // printf("\n");
-
-    for (i = 0; i < j; i++)
-        printf("%d\t", result[i] + 1);  // Adjust to print vertices starting from 1
+    for(i=0; i<j;i++)
+        printf("%d\t",result[i]);
     printf("\n");
     
 }
