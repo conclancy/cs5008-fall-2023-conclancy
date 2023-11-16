@@ -1,5 +1,5 @@
-// Enter your name here
-//Enter your email here
+// Connor Clancy
+// clancy.co@neu.edu
 
 #include<stdio.h>
 #include<stdlib.h>
@@ -10,28 +10,28 @@
 typedef struct {
     int a[MAX];
     int front,rear;
-}Queue;
+} Queue;
 
 // isEmpty function
 int isEmpty(int front) {
-    if(front==-1)
+    if(front == -1) {
         return 1;
-    else
+    } else {
         return 0;
+    }
 }
 
 // Dequeue function to dequeue a vertex from the queue
 int dequeue(Queue *q) {
     
     int x=q->a[q->front];
-    if(q->front==q->rear)
-    {
+
+    if(q->front==q->rear) {
         q->front=q->rear=-1;
+    } else {
+        q->front++;
     }
-    else
-     {
-         q->front++;
-     }
+
     return x;
 }
 
@@ -40,19 +40,19 @@ void enqueue(Queue *q, int e) {
 
     q->rear++;
     q->a[q->rear]=e;
-    if(q->front==-1)
-    {
+
+    if(q->front==-1) {
         q->front=0;
     }
 }
 
 // Create graph in adjacency matrix form
 void creategraph(int arr[][MAX],int V) {
+    
     int i,j;
-    for(i =1; i<=V; i++)
-    {
-        for(j = 1; j<=V; j++)
-        {
+
+    for(i =1; i<=V; i++) {
+        for(j = 1; j<=V; j++) {
             arr[i][j] = 0;
         }
     }
@@ -60,62 +60,86 @@ void creategraph(int arr[][MAX],int V) {
 
 // Function to add edges from source to destination
 void addEdge(int arr[][MAX],int src, int dest) {
-     arr[src][dest] = 1;
+    arr[src][dest] = 1;
 }
 
 // Print the adjacency matrix of the Graph
 void printAdjMatrix(int arr[][MAX],int V) {
-     int i, j;
 
-     for(i =1; i<=V; i++)
-     {
-         for(j = 1; j<=V; j++)
-         {
-             printf("%6d ", arr[i][j]);
-         }
-         printf("\n");
-     }
+    int i, j;
+
+    for(i =1; i<=V; i++) {
+        for(j = 1; j<=V; j++){
+            printf("%6d ", arr[i][j]);
+        }
+        printf("\n");
+    }
 }
 
 // calculate the indegree of each vertex by looping through all vertices and edges in the adjacency matrix
 int find_indegree(int arr[][MAX], int node,int n) {
-    
-    
+
+    int indeg = 0, i;
+
+    // count the number of incoming edges
+    for(i=1; i<n; i++) {
+        if(arr[i][node]) {
+            indeg++;
+        }
+    }
+
+    return indeg;
 }
 
 // Function to perform topological sorting of the Graph 
 void topologicalOrder(int arr[][MAX], Queue *t, int n) {
-    int j=0,delNode,i;
-    int result[MAX],indeg[MAX];
 
-    for (i=1; i<n; i++) {
+    int j=0, delNode, i;
+    int result[MAX], indeg[MAX];
+
+    for (i = 1; i < n; i++) {
         indeg[i] = find_indegree(arr, i, n);
-        if(indeg[i] == 0) {
+        if (indeg[i] == 0) {
             enqueue(t, i);
         }
     }
-    
-    
-    
-    
-    //insert your code here
-    
-    
+
+    while (!isEmpty(t->front)) {
+        delNode = dequeue(t);
+        result[j++] = delNode;
+
+        // Reduce the indegree of adjacent nodes and enqueue if indegree becomes 0
+        for (i = 1; i < n; i++) {
+            if (arr[delNode][i] == 1) {
+                indeg[i]--;
+                if (indeg[i] == 0) {
+                    enqueue(t, i);
+                }
+            }
+        }
+    }
     
     printf("topological ordering\n");
-    for(i=0; i<j;i++)
-        printf("%d\t",result[i]);
+    //for(i=0; i<j;i++)
+    //    printf("%d\t",result[i]);
+    // printf("\n");
+
+    for (i = 0; i < j; i++)
+        printf("%d\t", result[i] + 1);  // Adjust to print vertices starting from 1
     printf("\n");
     
 }
 
 // Main Program
 int main() {
+
     int adjMatrix[MAX][MAX];
     int vertices=7;
     Queue t;
     t.front=t.rear=-1;
+
     creategraph(adjMatrix,vertices);
+
     addEdge(adjMatrix,1,2);
     addEdge(adjMatrix,2,3);
     addEdge(adjMatrix,2,5);
