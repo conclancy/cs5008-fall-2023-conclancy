@@ -154,19 +154,28 @@ int main () {
   int v; // vertext variable
 
   // DIJKSTRA: create table T[V] = <infinity, undefined>
-  // ********** INSERT YOUR CODE HERE **********
+  for (i=0; i<GSIZE; i++) {
+    T[i].distance = INFINITY;
+    T[i].lastStep = -1; 
+  }
 
   // DIJKSTRA: T[source].distance = 0
-  // ********** INSERT YOUR CODE HERE **********
+  T[0].distance = 0;
 
   // DIJKSTRA: Create set Q = set(V)
-  // ********** INSERT YOUR CODE HERE **********
+  for (i=0; i <GSIZE; i++) {
+    Q[i] = true; 
+  }
 
 
   // DIJKSTRA: while Q is not empty
   while (setNotEmpty(Q,GSIZE)) {
     // DIJKSTRA: u = min q in Q of T[q].distance
-    // ********** INSERT YOUR CODE HERE **********
+    if (Q < 1) {
+      break; // base case, all nodes have been visited
+    }
+
+    u = minDistance(T, GSIZE, Q);
 
     // check for errors
     if (u<0) {
@@ -175,33 +184,31 @@ int main () {
     }
 
     // DIJKSTRA: S = neighbors(u)
-    // ********** INSERT YOUR CODE HERE **********
+    setNeighbors(S, E, GSIZE, u);
 
 
     // DIJKSTRA: Q = Q – u
-    // ********** INSERT YOUR CODE HERE **********
+    removeVertex(u, Q, GSIZE);
 
 
     // DIJKSTRA: for each neighbor v of u (ignore vertices that we have already finished)
     for (v=0; v<GSIZE; v++) {
       if (S[v] && Q[v]) {
         // DIJKSTRA: d = T[u].distance + E[u,v]
-        // ********** INSERT YOUR CODE HERE **********
-
+        d = T[u].distance + E[u][v];
 
         // DIJKSTRA: if (d < T[v].distance)
-	if (d < T[v].distance) {
-  	  // DIJKSTRA: //shorter path found
-  	  // DIJKSTRA: T[v].distance = d
-          // ********** INSERT YOUR CODE HERE **********
+	      if (d < T[v].distance) {
+          // DIJKSTRA: //shorter path found
+          // DIJKSTRA: T[v].distance = d
+          T[v].distance = d;
 
-	  // DIJKSTRA: T[v].lastStep = u
-          // ********** INSERT YOUR CODE HERE **********
-	}
+          // DIJKSTRA: T[v].lastStep = u
+          T[v].lastStep = u;
+        }
       }
     }
     // DIJKSTRA: //done with u
-
   }
 
   printTable(T, GSIZE, 0);
