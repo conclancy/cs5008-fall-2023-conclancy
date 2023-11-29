@@ -1,5 +1,5 @@
-// name: <your name here>
-// email: <your email here>
+// name: Connor Clancy
+// email: clancy.co@neu.edu
 // Compile with:
 //
 // gcc -lpthread hw12.c -o hw12
@@ -25,17 +25,20 @@ void* thread1 (void* vargp) {
 
 void* thread2 (void* vargp) {
   // add 5 to counter
-  // *** YOUR CODE GOES HERE ***
+  counter = counter + 5;
+  return NULL;
 }
 
 void* thread3 (void* vargp) {
   // subtract 2 from counter
-  // *** YOUR CODE GOES HERE ***
+  counter = counter - 2;
+  return NULL;
 }
 
 void* thread4 (void* vargp) {
   // subtract 10 from counter
-  // *** YOUR CODE GOES HERE ***
+  counter = counter - 10;
+  return NULL;
 }
 
 int main() {
@@ -51,8 +54,9 @@ int main() {
     pthread_create(&(tid[i]), NULL, thread1, NULL);
 
     // now create the 2nd, 3rd, 4th group of 100 threads
-    
-    // *** YOUR CODE GOES HERE ***
+    pthread_create(&(tid[i + NTHREADS]), NULL, thread2, NULL);
+    pthread_create(&(tid[i + 2 * NTHREADS]), NULL, thread3, NULL);
+    pthread_create(&(tid[i + 3 * NTHREADS]), NULL, thread4, NULL);
   }
 
   //wait until ALL 400 threads are done
