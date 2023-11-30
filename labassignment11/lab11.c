@@ -1,5 +1,5 @@
-//Enter your name here
-//Enter your email here
+// Connor Clancy
+// clancy.co@neu.edu
 //gcc -pthread lab11.c -o lab11
 #include <stdio.h>
 #include <unistd.h>
@@ -12,8 +12,36 @@ void *philosopher(void *x) {
   // Treat variable x as a pointer to an int and then extract the value into n
   int* a = (int*)x; //type cast address to integer type
   int n = *a; //dereferencing contents of a will be stored in n
+
+  // thinking
+  printf("Philosopher %d is thinking.\n", n + 1);
+
+  // 1. acquire lock --> blocking, wait until the thread gets both chopsticks
+  // lock left chopstick
+  pthread_mutex_lock(&chopstick[n]);
+
+  // lock right chopstick
+  pthread_mutex_lock(&chopstick[(n + 1) % 5]);
+
+  //---critical section---//
+
+  // 2. eating
+  // eating 
+  // print a statement that the philosopher is eating
+  printf("Philosopher %d is eating using chopstick[%d] and chopstick[%d].\n", n + 1, n, (n + 1) % 5);
   
-  /*-----Insert your code here----*/
+  // sleep(1 second)
+  sleep(1);
+
+  // print a statement that the philosopher is finished eating
+  printf("Philosopher %d finished eating.\n", n + 1);
+
+  // 3. unlock the chopsticks
+  // unlock left chopstick
+  pthread_mutex_unlock(&chopstick[n]);
+
+  // unlock right chopstick
+  pthread_mutex_unlock(&chopstick[(n + 1) % 5]);
    
   return NULL;
 }
