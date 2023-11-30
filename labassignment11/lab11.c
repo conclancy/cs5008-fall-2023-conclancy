@@ -21,7 +21,7 @@ void *philosopher(void *x) {
 
 /*------------ Main Program---------*/
 int main() {
-  int i,val[5];
+  int i, val[5];
   pthread_t threads[5]; 
   
     
