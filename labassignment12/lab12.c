@@ -1,16 +1,16 @@
-//enter your email here
-//enter your name here
+// Connor Clancy
+// clancy.co@neu.edu
 
 #include<stdio.h>
 #include<string.h>
 
-int compression(char arr[], int n, char res[]){
+int compression(char arr[], int n, char res[]) {
     
-    //length of the compressed string will be returned from the function
+  //length of the compressed string will be returned from the function
 
-    
-    
-    //insert your code here
+  
+  
+  //insert your code here
   // sprintf--convert int to char 
     
     
@@ -18,8 +18,7 @@ int compression(char arr[], int n, char res[]){
     
 }
  
-int main()
-{
+int main() {
     char a[]="aaaabbbbcccd";
     char res[50];
     int r,n=strlen(a);//n is the size of input array
